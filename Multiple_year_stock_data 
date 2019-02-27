@@ -1,0 +1,38 @@
+Sub Multiple_year_stock_data()
+Dim Each_Total As Double
+Dim Ticker_Row As Double
+Dim ws As Worksheet
+
+For Each ws In Worksheets
+
+ws.Cells(1, 9).Value = "Ticker"
+ws.Cells(1, 10).Value = "Total Stock Volume"
+
+
+Each_Total = 0
+Ticker_Row = 2
+
+RowCount = Cells(Rows.Count, "A").End(xlUp).Row
+For i = 2 To RowCount
+
+If ws.Cells(i, 1).Value <> ws.Cells(i + 1, 1).Value Then
+    Each_Total = Each_Total + ws.Cells(i, 7).Value
+
+    ws.Cells(Ticker_Row, 9).Value = ws.Cells(i, 1).Value
+    ws.Cells(Ticker_Row, 10).Value = Each_Total
+
+    Each_Total = 0
+    Ticker_Row = Ticker_Row + 1
+
+    Else
+    Each_Total = Each_Total + ws.Cells(i, 7).Value
+
+    End If
+
+    Next i
+
+Next ws
+
+End Sub
+
+
